@@ -1,12 +1,10 @@
 /*CSS*/
 div.main{
-	float:left;
+	float:center;
 	display: block;
 	margin:auto;
 	width:1200px;
-	background-color: #484848;
-	border-color: #999999;
-	border-style: outset;
+	background-color: #424242 ;
 	min-height:600px;
 }
 
@@ -18,23 +16,29 @@ div.div-band{
 }
 
 div.controls{
-	float:left;
+	float:center;
 	width:33%;
 	position:relative;
-	background-color: #424242;
+	background-color: #424242 ;
 	min-height:100px;
 	text-align:center;
 	vertical-align:bottom;
 	margin:auto;
 }
 
+div.beginControls{
+    float: center;
+    padding-left:20px
+        
+}
+
+
 div.div-float-right{
 	margin-right:8px;
 	float:right;
     width:48%;
     position:relative;
-	background-color: #424242; 
-	border-style: inset;
+	background-color: #424242 ; 
 }
 
 div.div-float-left{
@@ -42,8 +46,7 @@ div.div-float-left{
 	float:left;
 	width:48%;
 	position:relative;
-	background-color: #424242;
-	border-style: inset;
+	background-color: #424242 ;
 }
 
 img.imgSq{
@@ -51,13 +54,17 @@ img.imgSq{
 	display : block;
     margin : auto;
 	width:512px;
-	text-align:center;                                                                
+	text-align:center;                       
 	height:512px;
 }
 
 input[type=button] {
-	height:25px;
-	width:25px;
+    background:url(btn.PNG) no-repeat;
+	height:40px;
+	width:40px;
+    border: none;
+    color: black;
+    font-style: bold;
 	margin : 3px 3px 3px 3px ;
 	text-align:center;
     cursor:pointer;
