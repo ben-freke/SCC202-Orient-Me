@@ -1,0 +1,125 @@
+/*CSS*/
+div.main{
+	float:center;
+	display: block;
+	margin:auto;
+	width:100%;
+	background-color: #424242 ;
+	min-height:600px;
+}
+
+div.div-band{
+	float:left;
+	clear:both;
+	width:100%;
+	min-height:16px;
+}
+
+div.controls{
+	float:center;
+	width:33%;
+	position:relative;
+	background-color: #424242 ;
+	min-height:100px;
+	text-align:center;
+	vertical-align:bottom;
+	margin:auto;
+}
+
+div.beginControls{
+    float: center;
+    padding-left:20px
+        
+}
+
+
+div.div-float-right{
+	margin-right:8px;
+	float:right;
+    width:48%;
+    position:relative;
+	background-color: #424242 ; 
+}
+
+div.div-float-left{
+	margin-left:8px;
+	float:left;
+	width:48%;
+	position:relative;
+	background-color: #424242 ;
+}
+
+img.imgSq{
+	padding:20px;
+	display : block;
+    margin : auto;
+	width:512px;
+	text-align:center;                       
+	height:512px;
+}
+
+.buttonStop{
+background:url(btn_stop.png) no-repeat;
+	height:40px;
+	width:40px;
+    border: none;
+    color: black;
+    font-style: bold;
+	margin : 3px 3px 3px 3px ;
+	text-align:center;
+    cursor:pointer;
+	vertical-align:middle;
+    }
+
+.buttonStart{
+background:url(btn_start.png) no-repeat;
+	height:40px;
+	width:40px;
+    border: none;
+    color: black;
+    font-style: bold;
+	margin : 3px 3px 3px 3px ;
+	text-align:center;
+    cursor:pointer;
+	vertical-align:middle;
+    }
+
+.buttonUp{
+background:url(btn_up.PNG) no-repeat;
+	height:40px;
+	width:40px;
+    border: none;
+    color: black;
+    font-style: bold;
+	margin : 3px 3px 3px 3px ;
+	text-align:center;
+    cursor:pointer;
+	vertical-align:middle;
+    }
+
+.buttonDown{
+background:url(btn_down.PNG) no-repeat;
+	height:40px;
+	width:40px;
+    border: none;
+    color: black;
+    font-style: bold;
+	margin : 3px 3px 3px 3px ;
+	text-align:center;
+    cursor:pointer;
+	vertical-align:middle;
+    }
+    
+
+.rbText{
+  color: #eeeeFF;
+  font-family:arial;
+  font-weight: bold; 
+  width:25px;
+}
+
+.valueText{
+  color: #FF;
+  font-family:arial;
+  font-weight: bold; 
+}

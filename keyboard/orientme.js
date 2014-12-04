@@ -1,16 +1,51 @@
 var currentId=0;
 var maxTrials = 6;
 var dateStart, dateEnd;
+var intervalLoop;
+var allowedRefresh = false;
+var experimentPlay = false;
+var canProceed = true;
+
+document.onkeydown=function(e){ 
+    if(e.keyCode == 32 && experimentPlay == false)clickedStart();
+    else if(e.keyCode == 32 && experimentPlay == true && canProceed == true)clickedEnd();
+    
+    if(e.keyCode == 38 && experimentPlay == true)updateRotation( 5, 0, 0);;
+    if(e.keyCode == 40 && experimentPlay == true)updateRotation( -5, 0, 0);
+    
+    if(e.keyCode == 37 && experimentPlay == true)updateRotation( 0, -5, 0);
+    if(e.keyCode == 39 && experimentPlay == true)updateRotation( 0, 5, 0);
+    
+    if(e.keyCode == 81 && experimentPlay == true)updateRotation(  0, 0,-5);
+    if(e.keyCode == 87 && experimentPlay == true)updateRotation(  0, 0, 5);
+
+
+    
+    
+    
+    
+    
+
+};
+
+window.onbeforeunload = function() {
+    if (!allowedRefresh) return "Woah! Let's not loose the data now. Don't refresh this page unless you've been told to. :)";
+};
+
+
 
 //user clicks start to begin trial
 function clickedStart(){
+  
+    
 	//get the current pattern
 	parsePattern(trialData[currentId],currentPattern);
+    experimentPlay = true;
+    canProceed = false;
 	forceUpdate.right='show';
 	forceUpdate.left='show';
-	document.getElementById('btnStart').disabled = true; //disable start button
-	disableButtons(false); //not disable
 	timerOperation(true); //start clock
+    intervalLoop = setInterval(recordResults,100);
 }
 
 function parsePattern(unparsedStr, patSet){
@@ -26,14 +61,7 @@ function parsePattern(unparsedStr, patSet){
 }
 
 //+/- buttons are enabled
-function disableButtons(state){
-	document.getElementById('xDn').disabled = state;
-	document.getElementById('yDn').disabled = state;
-	document.getElementById('zDn').disabled = state;
-	document.getElementById('xUp').disabled = state;
-	document.getElementById('yUp').disabled = state;
-	document.getElementById('zUp').disabled = state;
-}
+
 
 //if +/- buttons are pressed, rotation needs to change
 //we apply global rotation and not local rotation
@@ -47,37 +75,44 @@ function updateRotation(xRot, yRot,zRot){
 	
 	t3DRight_shape.quaternion.copy(q); 	//apply orientation to shape
 	//if there has been one update, then we can enable the end button
-	if(document.getElementById('btnEnd').disabled) document.getElementById('btnEnd').disabled = false;
+    canProceed = true;
 }
 
 function clickedEnd(){//end button was clicked
+    experimentPlay = false;
 	recordResults();
-	disableButtons(true); //disable then
+    clearInterval(intervalLoop);
 	advanceTrial();
 }
 
 function recordResults(){
 	var elapsedTime = timerOperation(false); //stop clock
 	var rotationError = computeRotationError();
-	console.log(currentId, rotationError, elapsedTime);
+	console.log(currentId + "," + rotationError + "," + elapsedTime);
 }
 
 function computeRotationError(){
-	//use t3DLQuat and t3DRQuat to compute the angle error 
-	//Refer the Quaternions helpsheet for implementation math
-	console.log("TBD: Compute the rotation error");
-	return -180;
+	var a = new THREE.Vector3( 1, 0, 0 );
+	a.applyQuaternion(t3DRQuat);
+
+	var b = new THREE.Vector3( 1, 0, 0 );
+	b.applyQuaternion(t3DLQuat);
+
+	var c = Math.abs(Math.acos(a.dot(b)));
+
+	return c;
 }
+
+
 
 function advanceTrial(){
 	currentId++;
-	document.getElementById('btnEnd').disabled = true; //disable end button
 	if(maxTrials==currentId){//you are done
-		alert("Experimental condition complete!");
-		document.getElementById('btnStart').disabled = true; //also disable start button
+        allowedRefresh=true;
+        window.location.replace('../finish.html');
 	}
 	else{
-		document.getElementById('btnStart').disabled = false; //else enable it
+
 	}
 	forceUpdate.right='hide';
 	forceUpdate.left ='hide';
