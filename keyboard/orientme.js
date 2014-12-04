@@ -88,7 +88,7 @@ function clickedEnd(){//end button was clicked
 function recordResults(){
 	var elapsedTime = timerOperation(false); //stop clock
 	var rotationError = computeRotationError();
-	console.log(currentId + "," + rotationError + "," + elapsedTime);
+    window.parent.document.getElementById('mainLog').value += (currentId + "," + rotationError + "," + elapsedTime + "\n");
 }
 
 function computeRotationError(){

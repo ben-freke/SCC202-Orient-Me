@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ben Freke SCC.202 Orient Me!</title>
-
+ <script type="text/javascript">
+           function hideiFrame(){
+               window.parent.document.getElementById('mainFrame').style.display = 'none'; 
+           }
+</script>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -29,10 +33,15 @@
       <div class='text-center' style="color:white">
         
       <h3>You've finished. Thanks for taking part.</h3>
+          <button onclick= "hideiFrame()" type="button" class="btn btn-success" >Show Results</button>
       </div>
       
           </div>
 </div>
+      
+       
+      
+      
       
     
 

@@ -67,9 +67,11 @@ function clickedEnd(){//end button was clicked
 function recordResults(){
 	var elapsedTime = timerOperation(false); //stop clock
 	var rotationError = computeRotationError();
-	console.log(currentId + "," + rotationError + "," + elapsedTime);
+    window.parent.document.getElementById('mainLog').value += (currentId + "," + rotationError + "," + elapsedTime + "\n");
+	//console.log(currentId + "," + rotationError + "," + elapsedTime + "&#13;");
 }
 
+ 
 function computeRotationError(){
 	var a = new THREE.Vector3( 1, 0, 0 );
 	a.applyQuaternion(t3DRQuat);
