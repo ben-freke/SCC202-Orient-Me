@@ -5,6 +5,13 @@ var intervalLoop;
 var allowedRefresh = false;
 var experimentPlay = false;
 var canProceed = true;
+var trialData = [];
+var numbers1;
+var numbers2;
+var numbers3;
+var numbers4;
+var numbers5;
+var numbers6;
 
 document.onkeydown=function(e){ 
     if(e.keyCode == 32 && experimentPlay == false)clickedStart();
@@ -19,13 +26,6 @@ document.onkeydown=function(e){
     if(e.keyCode == 81 && experimentPlay == true)updateRotation(  0, 0,-5);
     if(e.keyCode == 87 && experimentPlay == true)updateRotation(  0, 0, 5);
 
-
-    
-    
-    
-    
-    
-
 };
 
 window.onbeforeunload = function() {
@@ -34,10 +34,74 @@ window.onbeforeunload = function() {
 
 
 
+function generateTrialData(){
+    
+    for (var x=0; x<6; x++){
+    
+    numbers1 = Math.floor((Math.random() * 36) + 0);
+    numbers2 = Math.floor((Math.random() * 36) + 0);
+    numbers3 = Math.floor((Math.random() * 36) + 0);
+    numbers4 = Math.floor((Math.random() * 36) + 0);
+    numbers5 = Math.floor((Math.random() * 36) + 0);
+    numbers6 = Math.floor((Math.random() * 36) + 0);
+   
+    if (x<3){
+            trialData[x] = "87967744-" + numbers1*10 + "-" +  numbers2*10 + "-" +  numbers3*10 + "-" +  numbers4*10 + "-" +  numbers5*10 + "-" +  numbers6*10
+    }
+    if (x>3){
+        trialData[x] = "67240743-" + numbers1*10 + "-" +  numbers2*10 + "-" +  numbers3*10 + "-" +  numbers4*10 + "-" +  numbers5*10 + "-" +  numbers6*10
+    }
+   
+
+    
+}
+
+
+for (var y=0; y<6; y++){
+    for (var z=0; z<6; z++){
+        if (!(y==z)){
+            if (trialData[y] == trialData[z]) {
+                while (trialData[y] == trialData[z]) {
+
+            numbers1 = Math.floor((Math.random() * 36) + 0);
+            numbers2 = Math.floor((Math.random() * 36) + 0);
+            numbers3 = Math.floor((Math.random() * 36) + 0);
+            numbers4 = Math.floor((Math.random() * 36) + 0);
+            numbers5 = Math.floor((Math.random() * 36) + 0);
+            numbers6 = Math.floor((Math.random() * 36) + 0);
+
+                var splitTemp = trialData[y].split("-");
+                pattern = splitTemp[0];
+                    
+                    trialData[y] = pattern + "-" + numbers1*10 + "-" +  numbers2*10 + "-" +  numbers3*10 + "-" +  numbers4*10 + "-" +  numbers5*10 + "-" +  numbers6*10
+           
+                }
+                y=0;
+                z=0;
+            }
+        }
+    }
+}
+
+var m = trialData.length, t, i;
+
+while (m) {
+    
+    i = Math.floor(Math.random() * m--);
+    
+    t = trialData[m];
+    trialData[m] = trialData[i];
+    trialData[i] = t;
+    }
+}
+
+
+
+
 //user clicks start to begin trial
 function clickedStart(){
   
-    
+      generateTrialData();
 	//get the current pattern
 	parsePattern(trialData[currentId],currentPattern);
     experimentPlay = true;
@@ -138,11 +202,3 @@ function timerOperation(started){
 //present 3 of pattern 1 and 3 of pattern 2 per condition for each user
 //randomize the order of presentation 
 //don't repeat any one single datapoint for a single user (repeats across users are ok as long as the whole data set doesn't repeat)
- var trialData = ['87967744-0-110-70-110-10-120', '87967744-0-110-70-140-120-70',  '87967744-10-210-90-110-10-120', 
-				  '87967744-10-210-90-60-60-140', '87967744-110-40-110-20-170-30', '87967744-110-40-110-30-100-140', 
-				  '87967744-140-120-70-10-210-90','87967744-140-120-70-90-110-70', '87967744-40-160-70-110-40-110', 
-				  '87967744-40-160-70-80-10-150', '87967744-90-110-70-110-10-120', '87967744-90-110-70-140-120-70', 
-				  '67240743-0-120-120-20-80-140', '67240743-0-120-120-60-60-150',  '67240743-10-60-180-20-80-140', 
-				  '67240743-10-60-180-80-30-160', '67240743-20-60-170-30-120-120', '67240743-20-60-170-90-80-100', 
-				  '67240743-30-120-90-20-150-100','67240743-30-120-90-80-30-160',  '67240743-50-130-90-20-0-170', 
-				  '67240743-50-130-90-50-80-100', '67240743-60-60-150-20-0-170',   '67240743-60-60-150-50-130-90'];
